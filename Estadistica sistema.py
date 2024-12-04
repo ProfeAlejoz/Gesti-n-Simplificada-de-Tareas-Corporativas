@@ -37,10 +37,10 @@ porcentajeCompletadas = resumenEstadisticas(tareas)
 eventosInscritos = eventosPorUsuario(usuarios)
 
 
-print(f"Número total de usuarios: {totalUsuarios}")
-print(f"Número total de tareas: {totalTareas}")
-print(f"Número total de eventos: {totalEventos}")
-print(f"Porcentaje de tareas completadas: {porcentajeCompletadas:.2f}%")
-print("Cantidad de eventos en los que cada usuario está inscrito:")
+print(f"Número total de usuarios: {totalUsuarios}\n-----------------------------")
+print(f"Número total de tareas: {totalTareas}\n-----------------------------")
+print(f"Número total de eventos: {totalEventos}\n-----------------------------")
+print(f"Porcentaje de tareas completadas: {porcentajeCompletadas:.2f}%\n-----------------------------")
+print("Cantidad de eventos en los que cada usuario está inscrito:\n-----------------------------")
 for usuario, cantidad in eventosInscritos.items():
-    print(f"{usuario}: {cantidad} evento(s)")
+    print(f"{usuario}: {cantidad} evento(s)\n^^^^^^^^^^^^^^^^^^^^")
