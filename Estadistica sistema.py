@@ -13,17 +13,17 @@ eventos = [
     {"id": 2, "nombre": "Evento 2"},
 ]
 def contarElementos(usuarios, tareas, eventos):
-    totalUsuarios = len(usuarios)
-    totalTareas = len(tareas)
-    totalEVentos = len(eventos)
-    return totalUsuarios, totalTareas, totalEVentos
+    toUsers = len(usuarios)
+    toTareas = len(tareas)
+    toEvents = len(eventos)
+    return toUsers, toTareas, toEvents
 def resumenEstadisticas(tareas):
     total_tareas = len(tareas)
     if total_tareas == 0:
         porcentajeCompletadas = 0
     else:
         tareasCompletadas = sum(1 for tarea in tareas if tarea["completada"])
-        porcentajeCompletadas = (tareasCompletadas / totalTareas) * 100
+        porcentajeCompletadas = (tareasCompletadas / toTareas) * 100
     return porcentajeCompletadas
 
 def eventosPorUsuario(usuarios):
@@ -32,14 +32,14 @@ def eventosPorUsuario(usuarios):
         eventosInscritos[usuario["nombre"]] = len(usuario["eventos"])
     return eventosInscritos
 
-totalUsuarios, totalTareas, totalEventos = contarElementos(usuarios, tareas, eventos)
+toUsers, toTareas, toEvents = contarElementos(usuarios, tareas, eventos)
 porcentajeCompletadas = resumenEstadisticas(tareas)
 eventosInscritos = eventosPorUsuario(usuarios)
 
 
-print(f"Número total de usuarios: {totalUsuarios}\n-----------------------------")
-print(f"Número total de tareas: {totalTareas}\n-----------------------------")
-print(f"Número total de eventos: {totalEventos}\n-----------------------------")
+print(f"Número total de usuarios: {toUsers}\n-----------------------------")
+print(f"Número total de tareas: {toTareas}\n-----------------------------")
+print(f"Número total de eventos: {toEvents}\n-----------------------------")
 print(f"Porcentaje de tareas completadas: {porcentajeCompletadas:.2f}%\n-----------------------------")
 print("Cantidad de eventos en los que cada usuario está inscrito:\n-----------------------------")
 for usuario, cantidad in eventosInscritos.items():
