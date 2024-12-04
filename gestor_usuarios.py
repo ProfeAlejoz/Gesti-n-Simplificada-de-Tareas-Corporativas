@@ -41,5 +41,14 @@ def registro():
         continuar = input("¿Deseas registrar otro usuario? (s/n): ")
         if continuar.lower() != 's':
             break
-
+def listar_usuarios():
+    "listado de todos los usuarios registrados."
+    if not usuarios:
+        print("No hay usuarios registrados.")
+    else:
+        print("Lista de usuarios registrados:")
+        for i, usuario in enumerate(usuarios, start=1):
+            print(f"{i}. Nombre: {usuario['nombre']}, Edad: {usuario['edad']}, Correo: {usuario['correo']}.")
+            
+listar_usuarios()           
 registro()
