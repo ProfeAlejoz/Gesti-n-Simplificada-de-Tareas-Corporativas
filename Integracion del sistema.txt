@@ -1,0 +1,31 @@
+def mostrar_menu():
+    print(""" ====== Menú Principal ======
+    1. Gestion de usuarios
+    2. Gestion de tareas
+    3. Gestion de eventos 
+    4. Estadistica del sistema
+    5. Seguridad y validaciones 
+    6. SALIR """) 
+    
+    while True: 
+        opcion = (input("Elija una de las opciones: "))
+        if opcion == "1": 
+            print("Ingreso a Gestion de usuarios")
+            #aqui la funcion de gestio de usuarios 
+        elif opcion == "2":
+            print("Ingreso a Gestion de tareas ")
+            #aqui la funcion de gestio de usuarios 
+        elif opcion == "3":
+            print("Ingreso a Gestion de eventos")
+            #aqui la funcion de gestio de usuarios 
+        elif opcion == "4":
+            print("Ingreso a Estadistica del sistema")
+            #aqui la funcion de gestio de usuarios 
+        elif opcion == "5":
+            print("Ingreso a Seguridad y validaciones")
+            #aqui la funcion de gestio de usuarios 
+        elif opcion == "6":
+            print("Saliendo....")
+            break
+        else:
+            print("Opcion no valida. Ingrese una opcion validad")
