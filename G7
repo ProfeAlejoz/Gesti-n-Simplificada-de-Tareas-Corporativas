@@ -1,0 +1,143 @@
+import random
+usuarios = []
+tareas_administrativas = [
+    "Responder y organizar correos electrónicos",
+    "Programar reuniones y eventos en el calendario"
+]
+
+tareas_financieras = [
+    "Verificar y procesar facturas simples",
+    "Realizar seguimiento de pagos pendientes",
+    "Actualizar registros contables básicos"
+]
+
+tareas_tecnologicas = [
+    "Instalar actualizaciones sencillas en computadoras o software",
+    "Resolver problemas técnicos menores (reinicios, ajustes simples)",
+    "Respaldar archivos importantes en el sistema"
+]
+
+def crear_usuario():
+    nombre = input("Ingresa el nombre del usuario: ").strip()
+    if any(usuario["nombre"] == nombre for usuario in usuarios):
+        print(f"El usuario '{nombre}' ya existe.\n")
+        return
+    tareas_aleatorias = random.sample(tareas_administrativas + tareas_financieras + tareas_tecnologicas, 3)  # Selecciona 3 tareas aleatorias
+    usuarios.append({"nombre": nombre, "tareas": [{"descripcion": tarea, "completada": False} for tarea in tareas_aleatorias], "eventos": []})
+    print(f"\nUsuario '{nombre}' creado con éxito con tareas asignadas.\n")
+
+def mostrar_tareas_usuario(nombre_usuario):
+    for usuario in usuarios:
+        if usuario["nombre"] == nombre_usuario:
+            print(f"\nTareas asignadas a {nombre_usuario}:")
+            if not usuario["tareas"]:
+                print("No tiene tareas asignadas.")
+            else:
+                for tarea in usuario["tareas"]:
+                    estado = "Completada" if tarea["completada"] else "Pendiente"
+                    print(f" - {tarea['descripcion']} ({estado})")
+            return
+    print(f"Error: Usuario '{nombre_usuario}' no encontrado.\n")
+
+def asignar_tarea():
+    if not usuarios:
+        print("No hay usuarios creados. Por favor, crea un usuario primero.\n")
+        return
+    nombre_usuario = input("Ingresa el nombre del usuario: ").strip()
+    tarea = input("Describe la tarea a asignar: ").strip()
+    for usuario in usuarios:
+        if usuario["nombre"] == nombre_usuario:
+            usuario["tareas"].append({"descripcion": tarea, "completada": False})
+            print(f"Tarea '{tarea}' asignada a {nombre_usuario}.\n")
+            mostrar_tareas_usuario(nombre_usuario)  
+            return
+    print(f"Error: Usuario '{nombre_usuario}' no encontrado.\n")
+
+def inscribir_evento():
+    if not usuarios:
+        print("No hay usuarios creados. Por favor, crea un usuario primero.\n")
+        return
+    nombre_usuario = input("Ingresa el nombre del usuario: ").strip()
+    evento = input("Nombre del evento: ").strip()
+    for usuario in usuarios:
+        if usuario["nombre"] == nombre_usuario:
+            if evento in usuario["eventos"]:
+                print(f"El usuario ya está inscrito en el evento '{evento}'.\n")
+                return
+            usuario["eventos"].append(evento)
+            print(f"Usuario '{nombre_usuario}' inscrito en el evento '{evento}'.\n")
+            return
+    print(f"Error: Usuario '{nombre_usuario}' no encontrado.\n")
+
+def completar_tarea():
+    if not usuarios:
+        print("No hay usuarios creados. Por favor, crea un usuario primero\n")
+        return
+    nombre_usuario = input("Ingresa el nombre del usuario: ").strip()
+    tarea = input("Describe la tarea que has completado: ").strip()
+    for usuario in usuarios:
+        if usuario["nombre"] == nombre_usuario:
+            for t in usuario["tareas"]:
+                if t["descripcion"] == tarea and not t["completada"]:
+                    t["completada"] = True
+                    print(f"Tarea '{tarea}' marcada como completada para {nombre_usuario}.\n")
+                    mostrar_tareas_usuario(nombre_usuario)  # Mostrar tareas después de completarla
+                    return
+            print(f"Tarea '{tarea}' no encontrada o ya completada.\n")
+            return
+    print(f"Error: Usuario '{nombre_usuario}' no encontrado.\n")
+
+def generar_reporte():
+    if not usuarios:
+        print("No hay usuarios creados. Por favor, crea un usuario primero.\n")
+        return
+    nombre_usuario = input("Ingresa el nombre del usuario: ").strip()
+    for usuario in usuarios:
+        if usuario["nombre"] == nombre_usuario:
+            print("\n--------------- Reporte del Usuario --------------")
+            print(f"Nombre: {usuario['nombre']}")
+            completadas = sum(1 for tarea in usuario["tareas"] if tarea["completada"])
+            print("__________________")
+            print(f"Tareas completadas: {completadas}/{len(usuario['tareas'])}")
+            if usuario["tareas"]:
+                print("....................................................")
+                print("Tareas pendientes:")
+                for tarea in usuario["tareas"]:
+                    estado = "Completada" if tarea["completada"] else "Pendiente"
+                    print(f" - {tarea['descripcion']} ({estado})")
+            else:
+                print("__________________")
+                print("No hay tareas asignadas.")
+            print("Eventos inscritos:", ", ".join(usuario["eventos"]) if usuario["eventos"] else "Ninguno")
+            print("------------------------------------------------------\n")
+            return
+    print(f"Error: Usuario '{nombre_usuario}' no encontrado.\n")
+
+def menu():
+    while True:
+        print("------------------ Menú --------------------")
+        print("1. Crear un usuario con tareas aleatorias")
+        print("2. Asignar tareas adicionales")
+        print("3. Inscribir en eventos")
+        print("4. Completar tarea")
+        print("5. Generar reporte")
+        print("6. Salir")
+        print("_______________")
+        opcion = input("Selecciona una opción: ").strip()
+        
+        if opcion == "1":
+            crear_usuario()
+        elif opcion == "2":
+            asignar_tarea()
+        elif opcion == "3":
+            inscribir_evento()
+        elif opcion == "4":
+            completar_tarea()
+        elif opcion == "5":
+            generar_reporte()
+        elif opcion == "6":
+            print("Hasta luego!")
+            break
+        else:
+            print("Opción inválida. Intenta de nuevo.\n")
+menu()
