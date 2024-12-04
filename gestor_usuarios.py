@@ -37,3 +37,12 @@ def registro():
     usuarios.append(usuario)
     print(f"Usuario {nombre} registrado correctamente.\n")
 registro()
+
+def listar_usuarios():
+    "listado de todos los usuarios registrados."
+    if not usuarios:
+        print("No hay usuarios registrados.")
+    else:
+        print("Lista de usuarios registrados:")
+        for i, usuario in enumerate(usuarios, start=1):
+            print(f"{i}. Nombre: {usuario['nombre']}, Edad: {usuario['edad']}, Correo: {usuario['correo']}.")
